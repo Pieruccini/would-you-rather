@@ -6,13 +6,13 @@
  * @param {user} authUser
  * @param {string} answer
  */
-const addVoteToQuestion = ({ questions, qid, answer, authUser }) => {
+export const addVoteToQuestion = ({ questions, qid, answer, authUser }) => {
   return {
     ...questions,
     [qid]: {
       ...questions[qid],
       [answer]: {
-        votes: [...question[qid][answer], authUser],
+        votes: [...questions[qid][answer], authUser],
       },
     },
   };

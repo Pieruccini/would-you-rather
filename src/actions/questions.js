@@ -3,7 +3,7 @@ import {
   _saveQuestion,
   _saveQuestionAnswer,
 } from "../utils/_DATA";
-import { usersAddAnswer } from "./users";
+import { usersAddAnswer, usersAddQuestion } from "./users";
 
 export const QUESTIONS_SET = "questions: set";
 export const QUESTIONS_CREATE = "questions: add";
@@ -13,7 +13,7 @@ export const QUESTION_ADD_VOTE = "question: set";
 const author = "Igor Pieruccini";
 
 const questionsSet = (questions) => ({
-  type: QUESTIONS_RECEIVE,
+  type: QUESTIONS_SET,
   questions,
 });
 
@@ -37,7 +37,7 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
   try {
     const question = _saveQuestion({ optionOneText, optionTwoText, author });
     dispatch(questionCreate(question));
-    dispatch(userAddQuestion(question.id, author));
+    dispatch(usersAddQuestion(question.id, author));
   } catch (e) {
     console.error("Error creating question:", e);
   }
@@ -50,9 +50,9 @@ const questionAddVote = ({ qid, answer, authUser }) => ({
   authUser,
 });
 
-export const handleQuestionAnswer = ({ qid, answer }) => (dispatch) => {
+export const handleQuestionAnswer = ({ qId, answer }) => (dispatch) => {
   try {
-    _saveQuestionAnswer({ authedUser: author, qid, answer });
+    _saveQuestionAnswer({ authedUser: author, qId, answer });
     dispatch(questionAddVote({ authUser: author, qId, answer }));
     dispatch(usersAddAnswer({ qId, answer, author }));
   } catch (e) {

@@ -5,7 +5,7 @@
  * @param {user} authUser
  * @param {string} qId
  */
-const addQuestionToUser = (users, authUser, qId) => {
+export const addQuestionToUser = (users, authUser, qId) => {
   return {
     ...users,
     [authUser]: {
@@ -23,7 +23,7 @@ const addQuestionToUser = (users, authUser, qId) => {
  * @param {string} answer optionOne / optionTwo
  * @param {string} qId
  */
-const addAnswerToUser = (users, authUser, answer, qId) => {
+export const addAnswerToUser = (users, authUser, answer, qId) => {
   return {
     ...users,
     [authUser]: {
