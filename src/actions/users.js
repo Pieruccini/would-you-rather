@@ -21,13 +21,15 @@ export const HandleInitialDataUsers = () => async (dispatch) => {
   }
 };
 
-export const usersAddQuestion = (qId) => ({
+export const usersAddQuestion = (qId, authUser) => ({
   type: USERS_ADD_QUESTIONS,
   qId,
+  authUser,
 });
 
-export const usersAddAnswer = ({ qId, answer }) => ({
+export const usersAddAnswer = ({ qId, answer, authUser }) => ({
   type: USERS_ADD_ANSWER,
   qId,
   answer,
+  authUser,
 });

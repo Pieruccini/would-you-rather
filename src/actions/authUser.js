@@ -1,6 +1,6 @@
 export const AUTH_LOGIN = "auth: login";
 
-export const authLogin = (userId) => ({
+export const authLogin = (user) => ({
   type: userId,
-  userId,
+  user,
 });

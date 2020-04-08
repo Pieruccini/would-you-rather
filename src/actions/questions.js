@@ -35,27 +35,26 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
   dispatch
 ) => {
   try {
-    //TODO: get auto from state instead of using a mock
     const question = _saveQuestion({ optionOneText, optionTwoText, author });
     dispatch(questionCreate(question));
-    dispatch(userAddQuestion(question.id));
+    dispatch(userAddQuestion(question.id, author));
   } catch (e) {
     console.error("Error creating question:", e);
   }
 };
 
-const questionAddVote = ({ qid, answer }) => ({
+const questionAddVote = ({ qid, answer, authUser }) => ({
   type: QUESTION_ADD_VOTE,
   qid,
   answer,
+  authUser,
 });
 
 export const handleQuestionAnswer = ({ qid, answer }) => (dispatch) => {
   try {
-    //TODO: get auto from state instead of using a mock
     _saveQuestionAnswer({ authedUser: author, qid, answer });
-    dispatch(questionAddVote(question));
-    dispatch(usersAddAnswer({ qId, answer }));
+    dispatch(questionAddVote({ authUser: author, qId, answer }));
+    dispatch(usersAddAnswer({ qId, answer, author }));
   } catch (e) {
     console.error("Error handling question answer", e);
   }
