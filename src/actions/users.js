@@ -4,7 +4,7 @@ export const USERS_SET = "users: set";
 export const USERS_ADD_QUESTIONS = "users: add question to user";
 export const USERS_ADD_ANSWER = "users: add answers to user";
 
-const usersSet = (users) => ({
+export const usersSet = (users) => ({
   type: USERS_SET,
   users,
 });
@@ -21,7 +21,7 @@ export const HandleInitialDataUsers = () => async (dispatch) => {
   }
 };
 
-export const usersAddQuestion = (qId, authUser) => ({
+export const usersAddQuestion = ({ qId, authUser }) => ({
   type: USERS_ADD_QUESTIONS,
   qId,
   authUser,
