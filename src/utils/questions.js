@@ -6,13 +6,13 @@
  * @param {user} authUser
  * @param {string} answer
  */
-export const addVoteToQuestion = ({ questions, qid, answer, authUser }) => {
+export const addVoteToQuestion = (questions, qId, answer, authUser) => {
   return {
     ...questions,
-    [qid]: {
-      ...questions[qid],
+    [qId]: {
+      ...questions[qId],
       [answer]: {
-        votes: [...questions[qid][answer], authUser],
+        votes: [...questions[qId][answer].votes, authUser],
       },
     },
   };

@@ -11,14 +11,15 @@ export const questions = (state = {}, action) => {
       return action.questions;
 
     case QUESTIONS_CREATE:
+      const { question } = action;
       return {
         ...state,
-        questions,
+        [question.id]: { ...question },
       };
 
     case QUESTION_ADD_VOTE:
-      const { qid, answer, authUser } = action;
-      return addVoteToQuestion(state, qid, answer, authUser);
+      const { qId, answer, authUser } = action;
+      return addVoteToQuestion(state, qId, answer, authUser);
 
     default:
       return state;

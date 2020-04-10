@@ -12,7 +12,7 @@ export const QUESTION_ADD_VOTE = "question: set";
 //TODO: temporary author
 const author = "Igor Pieruccini";
 
-const questionsSet = (questions) => ({
+export const questionsSet = (questions) => ({
   type: QUESTIONS_SET,
   questions,
 });
@@ -26,7 +26,7 @@ export const questionHandleInitialData = () => (dispatch) => {
   }
 };
 
-const questionCreate = (question) => ({
+export const questionCreate = (question) => ({
   type: QUESTIONS_CREATE,
   question,
 });
@@ -43,9 +43,9 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
   }
 };
 
-const questionAddVote = ({ qid, answer, authUser }) => ({
+export const questionAddVote = ({ qId, answer, authUser }) => ({
   type: QUESTION_ADD_VOTE,
-  qid,
+  qId,
   answer,
   authUser,
 });
