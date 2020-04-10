@@ -17,13 +17,10 @@ export const questionsSet = (questions) => ({
   questions,
 });
 
-export const questionHandleInitialData = () => (dispatch) => {
-  try {
-    const question = _getQuestions();
+export const handleQuestionInitialData = () => (dispatch) => {
+  return _getQuestions().then((question) => {
     dispatch(questionsSet(question));
-  } catch (e) {
-    console.error("Error fetching question", e);
-  }
+  });
 };
 
 export const questionCreate = (question) => ({

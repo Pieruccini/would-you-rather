@@ -12,13 +12,14 @@ export const usersSet = (users) => ({
 /**
  * fetch users and set the data to users reduce
  */
-export const HandleInitialDataUsers = () => async (dispatch) => {
-  try {
-    const users = _getUsers();
-    dispatch(usersSet(users));
-  } catch (e) {
-    console.error("Error fetching users:", e);
-  }
+export const handleInitialDataUsers = () => async (dispatch) => {
+  return _getUsers()
+    .then((users) => {
+      dispatch(usersSet(users));
+    })
+    .catch((e) => {
+      console.error("Error fetching users:", e);
+    });
 };
 
 export const usersAddQuestion = ({ qId, authUser }) => ({
