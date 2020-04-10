@@ -5,7 +5,7 @@ import { getPollViewData } from "../utils/utils";
 describe("TEST: utils", () => {
   it("getPollViewData", () => {
     const users = _getUsersMock();
-    const authUser = users["johndoe"];
+    const authUser = users["sarahedo"];
     const questions = _getQuestionsMock();
     const pollView = getPollViewData(users["sarahedo"], authUser, questions);
     const result = {
