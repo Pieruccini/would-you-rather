@@ -3,17 +3,18 @@ import { connect } from "react-redux";
 import { getPollViewData } from "../utils/utils";
 import PollView from "./PollView";
 import Nav from "react-bootstrap/Nav";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
   const [tab, setTab] = useState(0);
   const pools = useRef([pollViewsAnswered, pollViewsNotAnswered]).current;
-
+  console.log("pools", pools);
   const handleTabUpdate = (index) => {
     setTab(index);
   };
 
   return (
-    <div>
+    <div className={"pull-list-container"}>
       <Nav fill variant="tabs" defaultActiveKey="/home">
         <Nav.Item>
           <Nav.Link
@@ -36,17 +37,18 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
           </Nav.Link>
         </Nav.Item>
       </Nav>
-      <ul>
+      <br />
+      <ListGroup>
         {pools[tab].map((poll) => (
-          <li key={poll.id}>
+          <ListGroup.Item key={poll.id}>
             <PollView
               name={poll.name}
-              avatarUrl={poll.avatarUrl}
+              avatarURL={poll.avatarURL}
               optionOneText={poll.optionOneText}
             />
-          </li>
+          </ListGroup.Item>
         ))}
-      </ul>
+      </ListGroup>
     </div>
   );
 };
