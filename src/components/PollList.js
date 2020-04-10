@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { getUserFromQuestion } from "../utils/users";
+import { getPollViewData } from "../utils/utils";
 
-const PollList = ({ questions, users, authUser }) => {
+const PollList = ({ pollViews }) => {
   return (
     <div>
       <h3>Poll List</h3>
@@ -9,10 +11,9 @@ const PollList = ({ questions, users, authUser }) => {
   );
 };
 
-const mapStateToProps = ({ questions, users, authUser }) => ({
-  questions,
-  users,
-  authUser,
-});
-
+const mapStateToProps = ({ questions, users, authUser }) => {
+  return {
+    pollViews: {},
+  };
+};
 export default connect(mapStateToProps, null)(PollList);
