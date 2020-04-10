@@ -65,5 +65,5 @@ export const getUserFromQuestion = (qId, users) => {
  * @param {string.array} answers the answers of the user you want to check
  */
 export const userHasAnsweredQuestion = (qId, answers) => {
-  return answers[qId] ? true : false;
+  return answers[qId] !== undefined ? true : false;
 };

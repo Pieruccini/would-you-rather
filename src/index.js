@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import middleware from "./middleware";
 
-//TODO: add middleware
 const store = createStore(reducers, middleware);
 ReactDOM.render(
   <React.StrictMode>

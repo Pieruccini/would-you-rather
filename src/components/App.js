@@ -5,14 +5,13 @@ import { connect } from "react-redux";
 import { handleInitialDataUsers } from "../actions/users";
 import { handleQuestionInitialData } from "../actions/questions";
 import { authLogin } from "../actions/authUser";
+import { handleInitialData } from "../actions/shared";
 
 function App({ loaded, dispatch }) {
-  console.log(loaded);
   useEffect(() => {
-    //TODO: dispatch handles after login
-    dispatch(handleInitialDataUsers());
-    dispatch(handleQuestionInitialData());
-    //TODO: remove authLogin once we have a login screen
+    // //TODO: dispatch handles after login
+    dispatch(handleInitialData());
+    // //TODO: remove authLogin once we have a login screen
     dispatch(
       authLogin({
         id: "sarahedo",
@@ -40,7 +39,11 @@ function App({ loaded, dispatch }) {
 }
 
 const mapStateToProps = ({ questions, users, authUser }) => ({
-  loaded: authUser !== null,
+  // TODO: look for a better way to implement it
+  loaded:
+    authUser !== null &&
+    Object.keys(questions).length > 0 &&
+    Object.keys(users).length > 0,
 });
 
 export default connect(mapStateToProps)(App);

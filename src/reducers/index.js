@@ -4,4 +4,4 @@ import { authUser } from "./authUser";
 import { users } from "./users";
 
 //TODO: add reducers here
-export default combineReducers({ authUser, users, questions });
+export default combineReducers({ users, questions, authUser });

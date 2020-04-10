@@ -12,7 +12,6 @@ import { userHasAnsweredQuestion } from "./users";
 export const getPollViewData = (user, authUser, storeQuestions) => {
   const { avatarURL, name, questions } = user;
   const { answers } = authUser;
-
   return questions.reduce((acc, cur) => {
     const { optionOne, timestamp, id } = storeQuestions[cur];
     return {
@@ -23,7 +22,7 @@ export const getPollViewData = (user, authUser, storeQuestions) => {
         timestamp,
         avatarURL,
         name,
-        userHasAnswered: userHasAnsweredQuestion(cur.id, answers),
+        userHasAnswered: userHasAnsweredQuestion(cur, answers),
       },
     };
   }, {});
