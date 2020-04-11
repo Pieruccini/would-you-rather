@@ -48,14 +48,24 @@ export const addAnswerToUser = (users, authUser, answer, qId) => {
 };
 
 /**
- * Use the author from question to get the user(data) from the users
+ * get the question from user data
  * @param {question} question
  * @param {store.users} users
  */
-export const getUserFromQuestion = (qId, users) => {
+export const getQuestionFromUser = (qId, users) => {
   return Object.keys(users).find((key) => {
-    console.log(key);
     return users[key].question[qId];
+  });
+};
+
+/**
+ * returns the user from the question.author
+ * @param {question} question
+ * @param {users} users store.users
+ */
+export const getUserFromQuestion = (question, users) => {
+  return Object.values(users).find((val) => {
+    return question.author === val.id;
   });
 };
 

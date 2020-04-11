@@ -27,3 +27,14 @@ export const getPollViewData = (user, authUser, storeQuestions) => {
     };
   }, {});
 };
+
+export const getQuestionData = (question, users) => {
+  return {
+    id,
+    optionOne,
+    optionTwo,
+    avatarURL,
+    name,
+    userHasAnswered,
+  };
+};
