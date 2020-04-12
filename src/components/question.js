@@ -9,6 +9,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { handleQuestionAnswer } from "../actions/questions";
+import { MdFace } from "react-icons/md";
 
 const Question = ({
   id,
@@ -81,7 +82,10 @@ const Question = ({
               defaultShow={userHasAnswered}
               placement="right"
               trigger="click"
-              overlay={popover(optionOne.votes.length)}
+              overlay={popover(
+                optionOne.votes.length,
+                answer === "optionOne" ? avatarURL : null
+              )}
             >
               <ProgressBar
                 variant="warning"
@@ -99,7 +103,9 @@ const Question = ({
           variant="info"
           size="lg"
           disabled={userHasAnswered}
-          onClick={() => handleAnswer("optionTwo")}
+          onClick={() =>
+            handleAnswer("optionTwo", answer === "optionOne" ? avatarURL : null)
+          }
         >
           {optionTwo.text}
           {userHasAnswered && (
@@ -133,11 +139,27 @@ const stateMapToProps = ({ questions, users, authUser }, { id }) => {
 
 export default connect(stateMapToProps)(Question);
 
-const popover = (people) => {
+const popover = (people, avatarURL) => {
   console.log("people", people);
   return (
     <Popover id="popover-basic">
-      <Popover.Content>{people}</Popover.Content>
+      <Popover.Content>
+        <div>
+          <MdFace style={{ marginRight: "4px" }} />
+          {people}
+        </div>
+        <div>
+          {avatarURL && (
+            <Image
+              style={{ alignSelf: "center" }}
+              width={32}
+              height={32}
+              src={avatarURL}
+              roundedCircle
+            />
+          )}
+        </div>
+      </Popover.Content>
     </Popover>
   );
 };

@@ -24,7 +24,7 @@ code {
 
 .question-container {
   margin: 0 10vw 0 10vw;
-  max-width: 500px !important;
+  max-width: 80% !important;
 }
 
 .answer-rate {

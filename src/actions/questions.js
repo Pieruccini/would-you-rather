@@ -53,8 +53,6 @@ export const handleQuestionAnswer = ({ qId, answer }) => (
 ) => {
   try {
     const authUser = getState().authUser;
-    console.log("authUser", authUser);
-    console.log("qId", qId);
     _saveQuestionAnswer({ authedUser: authUser.id, qid: qId, answer });
     dispatch(questionAddVote({ authUser: authUser.id, qId, answer }));
     dispatch(usersAddAnswer({ qId, answer, authUser: authUser.id }));
