@@ -9,7 +9,7 @@
  */
 export const addQuestionToUser = (users, authUser, qId) => {
   if (!users[authUser]) {
-    console.warn(`user ${authUser} doesn't exist`);
+    console.warn(`user ${authUser.id} doesn't exist`);
     return users;
   }
   return {
@@ -32,7 +32,7 @@ export const addQuestionToUser = (users, authUser, qId) => {
 export const addAnswerToUser = (users, authUser, answer, qId) => {
   console.log("authUser", authUser);
   if (!users[authUser]) {
-    console.warn(`user ${authUser} doesn't exist`);
+    console.warn(`user ${authUser.id} doesn't exist`);
     return users;
   }
   return {

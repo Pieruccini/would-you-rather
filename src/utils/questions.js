@@ -14,6 +14,7 @@ export const addVoteToQuestion = (questions, qId, answer, authUser) => {
     [qId]: {
       ...questions[qId],
       [answer]: {
+        ...questions[qId][answer],
         votes: [...questions[qId][answer].votes, authUser],
       },
     },

@@ -1,6 +1,10 @@
 import { _getUsersMock } from "./users-data";
 import { _getQuestionsMock } from "./question-data";
-import { getPollViewData } from "../utils/utils";
+import {
+  getPollViewData,
+  getQuestionData,
+  calculateAnswerPercentage,
+} from "../utils/utils";
 import { getUserFromQuestion } from "../utils/users";
 
 describe("TEST: utils", () => {
@@ -46,6 +50,47 @@ describe("TEST: utils", () => {
         loxhs1bqm25b708cmbf3g: "optionTwo",
       },
       questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
+    });
+  });
+
+  it("getQuestionData", () => {
+    const questions = _getQuestionsMock();
+    const currentQuestion = questions["8xf0y6ziyjabvozdd253nd"];
+    const users = _getUsersMock();
+    const authUser = users["sarahedo"];
+    const questionData = getQuestionData(currentQuestion, users, authUser);
+    const result = {
+      id: "8xf0y6ziyjabvozdd253nd",
+      optionOne: {
+        votes: ["sarahedo"],
+        text: "have horrible short term memory",
+      },
+      optionTwo: {
+        votes: [],
+        text: "have horrible long term memory",
+      },
+      name: "Sarah Edo",
+      avatarURL: "../../images/snow.jpg",
+      userHasAnswered: true,
+    };
+    expect(questionData).toEqual(result);
+  });
+
+  it("calculateAnswersPercentage case 1", () => {
+    const optionOne = 40;
+    const optionTwo = 60;
+    expect(calculateAnswerPercentage(optionOne, optionTwo)).toEqual({
+      percentageOne: 40,
+      percentageTwo: 60,
+    });
+  });
+
+  it("calculateAnswersPercentage case 1", () => {
+    const optionOne = 10;
+    const optionTwo = 25;
+    expect(calculateAnswerPercentage(optionOne, optionTwo)).toEqual({
+      one: 29,
+      two: 71,
     });
   });
 });

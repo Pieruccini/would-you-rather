@@ -47,11 +47,17 @@ export const questionAddVote = ({ qId, answer, authUser }) => ({
   authUser,
 });
 
-export const handleQuestionAnswer = ({ qId, answer }) => (dispatch) => {
+export const handleQuestionAnswer = ({ qId, answer }) => (
+  dispatch,
+  getState
+) => {
   try {
-    _saveQuestionAnswer({ authedUser: author, qId, answer });
-    dispatch(questionAddVote({ authUser: author, qId, answer }));
-    dispatch(usersAddAnswer({ qId, answer, author }));
+    const authUser = getState().authUser;
+    console.log("authUser", authUser);
+    console.log("qId", qId);
+    _saveQuestionAnswer({ authedUser: authUser.id, qid: qId, answer });
+    dispatch(questionAddVote({ authUser: authUser.id, qId, answer }));
+    dispatch(usersAddAnswer({ qId, answer, authUser: authUser.id }));
   } catch (e) {
     console.error("Error handling question answer", e);
   }

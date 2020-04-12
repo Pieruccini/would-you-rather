@@ -21,3 +21,15 @@ code {
   flex-direction: column;
   justify-content: center;
 }
+
+.question-container {
+  margin: 0 10vw 0 10vw;
+  max-width: 500px !important;
+}
+
+.answer-rate {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+  background-color: green;
+}

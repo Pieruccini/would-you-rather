@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "../css/App.css";
 import PollList from "./PollList";
+import Question from "./Question";
 import { connect } from "react-redux";
 import { authLogin } from "../actions/authUser";
 import { handleInitialData } from "../actions/shared";
@@ -31,7 +32,12 @@ function App({ loaded, dispatch }) {
   return (
     <div className="App">
       would you rather
-      {loaded ? <PollList /> : null}
+      {loaded ? (
+        <div>
+          <Question id={"8xf0y6ziyjabvozdd253nd"} />
+          <PollList />
+        </div>
+      ) : null}
     </div>
   );
 }
