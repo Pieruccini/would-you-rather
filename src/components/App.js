@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { authLogin } from "../actions/authUser";
 import { handleInitialData } from "../actions/shared";
 import NewQuestion from "./NewQuestion";
+import LeaderboadList from "./LeaderboadList";
 
 function App({ loaded, dispatch }) {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App({ loaded, dispatch }) {
       would you rather
       {loaded ? (
         <div>
+          <LeaderboadList />
           <NewQuestion />
           <Question id={"8xf0y6ziyjabvozdd253nd"} />
           <PollList />
