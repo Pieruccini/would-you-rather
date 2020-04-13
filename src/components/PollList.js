@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { getPollViewData } from "../utils/utils";
 import PollView from "./PollView";
@@ -7,8 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
   const [tab, setTab] = useState(0);
-  const pools = useRef([pollViewsAnswered, pollViewsNotAnswered]).current;
-  console.log("pools", pools);
+  const pools = [pollViewsNotAnswered, pollViewsAnswered];
   const handleTabUpdate = (index) => {
     setTab(index);
   };
@@ -54,6 +53,7 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
 };
 
 const mapStateToProps = ({ questions, users, authUser }) => {
+  console.log("Poll list Questions", questions);
   const pollViews = Object.keys(users).reduce((acc, cur) => {
     return {
       ...acc,
@@ -63,10 +63,10 @@ const mapStateToProps = ({ questions, users, authUser }) => {
 
   return {
     pollViewsAnswered: Object.values(pollViews)
-      .sort((a, b) => a.timestamp - b.timestamp)
+      .sort((a, b) => b.timestamp - a.timestamp)
       .filter((poll) => poll.userHasAnswered),
     pollViewsNotAnswered: Object.values(pollViews)
-      .sort((a, b) => a.timestamp - b.timestamp)
+      .sort((a, b) => b.timestamp - a.timestamp)
       .filter((poll) => !poll.userHasAnswered),
   };
 };
