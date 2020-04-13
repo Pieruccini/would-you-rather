@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
+import { handleCreateQuestion } from "../actions/questions";
 
-const NewQuestion = () => {
+const NewQuestion = ({ dispatch }) => {
   const [options, setOptions] = useState({
-    optionOne: "",
-    optionTwo: "",
+    optionOneText: "",
+    optionTwoText: "",
   });
 
   const handleUpdateOption = (option, text) => {
@@ -14,6 +15,15 @@ const NewQuestion = () => {
       ...prev,
       [option]: text,
     }));
+  };
+
+  const handleSubmit = () => {
+    console.log("handle submit", options);
+    dispatch(
+      handleCreateQuestion({
+        ...options,
+      })
+    );
   };
 
   return (
@@ -26,9 +36,9 @@ const NewQuestion = () => {
           type="text"
           placeholder="first option"
           onChange={(e) => {
-            handleUpdateOption("optionOne", e.target.value);
+            handleUpdateOption("optionOneText", e.target.value);
           }}
-          value={options.optionOne}
+          value={options.optionOneText}
         />
         <p>or</p>
         <Form.Control
@@ -36,16 +46,17 @@ const NewQuestion = () => {
           type="text"
           placeholder="second option"
           onChange={(e) => {
-            handleUpdateOption("optionTwo", e.target.value);
+            handleUpdateOption("optionTwoText", e.target.value);
           }}
-          value={options.optionTwo}
+          value={options.optionTwoText}
         />
       </Form.Group>
       <Button
         block
         variant="outline-secondary"
         size="lg"
-        disabled={options.optionOne === "" || options.optionTwo === ""}
+        disabled={options.optionOneText === "" || options.optionTwoText === ""}
+        onClick={handleSubmit}
       >
         Create Question
       </Button>

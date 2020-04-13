@@ -9,9 +9,6 @@ export const QUESTIONS_SET = "questions: set";
 export const QUESTIONS_CREATE = "questions: add";
 export const QUESTION_ADD_VOTE = "question: set";
 
-//TODO: temporary author
-const author = "Igor Pieruccini";
-
 export const questionsSet = (questions) => ({
   type: QUESTIONS_SET,
   questions,
@@ -29,15 +26,24 @@ export const questionCreate = (question) => ({
 });
 
 export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
-  dispatch
+  dispatch,
+  getState
 ) => {
-  try {
-    const question = _saveQuestion({ optionOneText, optionTwoText, author });
-    dispatch(questionCreate(question));
-    dispatch(usersAddQuestion(question.id, author));
-  } catch (e) {
-    console.error("Error creating question:", e);
-  }
+  const { id } = getState().authUser;
+  console.log("id", id);
+  return _saveQuestion({
+    optionOneText,
+    optionTwoText,
+    author: id,
+  })
+    .then((question) => {
+      console.log("question", question);
+      dispatch(questionCreate(question));
+      dispatch(usersAddQuestion({ qId: question.id, authUser: id }));
+    })
+    .catch((e) => {
+      console.error("Error creating question:", e);
+    });
 };
 
 export const questionAddVote = ({ qId, answer, authUser }) => ({
