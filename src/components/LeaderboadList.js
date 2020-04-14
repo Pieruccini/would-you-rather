@@ -22,6 +22,7 @@ const LeaderboardList = ({ leaderboard, dispatch }) => {
 
 const mapStateToProps = ({ users }) => {
   return {
+    // TODO: sort array by score
     leaderboard: getLeaderboardData(users),
   };
 };

@@ -7,6 +7,7 @@ import { authLogin } from "../actions/authUser";
 import { handleInitialData } from "../actions/shared";
 import NewQuestion from "./NewQuestion";
 import LeaderboadList from "./LeaderboadList";
+import Login from "./Login";
 
 function App({ loaded, dispatch }) {
   useEffect(() => {
@@ -36,6 +37,7 @@ function App({ loaded, dispatch }) {
       would you rather
       {loaded ? (
         <div>
+          <Login />
           <LeaderboadList />
           <NewQuestion />
           <Question id={"8xf0y6ziyjabvozdd253nd"} />
