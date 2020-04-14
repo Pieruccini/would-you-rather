@@ -5,7 +5,6 @@ import LeaderboardView from "./LeaderboardView";
 import ListGroup from "react-bootstrap/ListGroup";
 
 const LeaderboardList = ({ leaderboard, dispatch }) => {
-  console.log("leaderboard", leaderboard);
   return (
     <div className="pull-list-container">
       <h4>Leaderboard</h4>

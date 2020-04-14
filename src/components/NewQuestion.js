@@ -18,7 +18,6 @@ const NewQuestion = ({ dispatch }) => {
   };
 
   const handleSubmit = () => {
-    console.log("handle submit", options);
     dispatch(
       handleCreateQuestion({
         ...options,

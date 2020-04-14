@@ -30,7 +30,6 @@ export const addQuestionToUser = (users, authUser, qId) => {
  * @param {string} qId
  */
 export const addAnswerToUser = (users, authUser, answer, qId) => {
-  console.log("authUser", authUser);
   if (!users[authUser]) {
     console.warn(`user ${authUser.id} doesn't exist`);
     return users;

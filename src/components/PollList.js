@@ -53,7 +53,6 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
 };
 
 const mapStateToProps = ({ questions, users, authUser }) => {
-  console.log("Poll list Questions", questions);
   const pollViews = Object.keys(users).reduce((acc, cur) => {
     return {
       ...acc,

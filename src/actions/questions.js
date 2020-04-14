@@ -30,14 +30,12 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
   getState
 ) => {
   const { id } = getState().authUser;
-  console.log("id", id);
   return _saveQuestion({
     optionOneText,
     optionTwoText,
     author: id,
   })
     .then((question) => {
-      console.log("question", question);
       dispatch(questionCreate(question));
       dispatch(usersAddQuestion({ qId: question.id, authUser: id }));
     })

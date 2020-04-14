@@ -140,7 +140,6 @@ const stateMapToProps = ({ questions, users, authUser }, { id }) => {
 export default connect(stateMapToProps)(Question);
 
 const popover = (people, avatarURL) => {
-  console.log("people", people);
   return (
     <Popover id="popover-basic">
       <Popover.Content>
