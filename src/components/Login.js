@@ -7,12 +7,17 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Image from "react-bootstrap/Image";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
+import { handleLogin } from "../actions/authUser";
 
-const Login = ({ users }) => {
+const Login = ({ users, dispatch }) => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleSelectUser = (user) => {
     setSelectedUser(user);
+  };
+
+  const handleSubmit = () => {
+    dispatch(handleLogin(selectedUser));
   };
 
   return (
@@ -48,6 +53,7 @@ const Login = ({ users }) => {
         block
         variant="outline-secondary"
         disabled={selectedUser === null}
+        onClick={handleSubmit}
       >
         Login
       </Button>
