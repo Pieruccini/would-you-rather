@@ -6,32 +6,42 @@ import { connect } from "react-redux";
 import NewQuestion from "./NewQuestion";
 import LeaderboadList from "./LeaderboadList";
 import Login from "./Login";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import { handleInitialDataUsers } from "../actions/users";
 import { handleInitialData } from "../actions/shared";
+import { useCookies } from "react-cookie";
+import { handleLogin } from "../actions/authUser";
 
-function App({ loaded, dispatch }) {
+function App({ logged, loaded, dispatch, history }) {
+  const [cookies] = useCookies(["auth"]);
+
   useEffect(() => {
-    dispatch(handleInitialData());
-  }, [dispatch]);
+    if (cookies.auth) {
+      // if the user is saved go to home page
+      dispatch(handleLogin(cookies.auth));
+      history.push("/home");
+    } else {
+      // if the user is not saved go to login page
+      dispatch(handleInitialData());
+      history.push("/login");
+    }
+  }, [cookies, history]);
 
+  if (!logged || !loaded) return null;
   return (
     <Container>
-      <BrowserRouter>
-        {!loaded && <Redirect to="/login" />}
-        <Route path="/home" component={PollList} />
-        <Route path="/login" component={Login} />
-        <Route path="/add" component={NewQuestion} />
-        <Route path="/questions/:questions_id" component={Question} />
-        <Route path="/leaderboard" component={LeaderboadList} />
-      </BrowserRouter>
+      <Route path="/home" component={PollList} />
+      <Route path="/login" component={Login} />
+      <Route path="/add" component={NewQuestion} />
+      <Route path="/questions/:questions_id" component={Question} />
+      <Route path="/leaderboard" component={LeaderboadList} />
     </Container>
   );
 }
 
 const mapStateToProps = ({ questions, users, authUser }) => ({
   logged: authUser !== null,
+  loaded: Object.keys(questions).length > 0,
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));

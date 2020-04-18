@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import { connect } from "react-redux";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -8,18 +8,24 @@ import Image from "react-bootstrap/Image";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import { handleLogin } from "../actions/authUser";
+import { useCookies } from "react-cookie";
 
 const Login = ({ users, dispatch, history }) => {
-  console.log("history", history);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [cookies, setCookie] = useCookies(["auth"]);
+
+  useEffect(() => {
+    if (cookies.auth) setSelectedUser(users[cookies.auth]);
+  }, [users]);
 
   const handleSelectUser = (user) => {
     setSelectedUser(user);
   };
 
   const handleSubmit = () => {
-    dispatch(handleLogin(selectedUser));
+    dispatch(handleLogin(selectedUser.id));
     history.push("/home");
+    setCookie("auth", selectedUser.id);
   };
 
   return (
@@ -36,7 +42,7 @@ const Login = ({ users, dispatch, history }) => {
           title="Users"
           id="input-group-dropdown-1"
         >
-          {users.map((user) => (
+          {Object.values(users).map((user) => (
             <Dropdown.Item onClick={() => handleSelectUser(user)}>
               <Image
                 style={{ alignSelf: "center" }}
@@ -64,7 +70,7 @@ const Login = ({ users, dispatch, history }) => {
 };
 
 const mapStateToProps = ({ users }) => ({
-  users: Object.values(users),
+  users,
 });
 
 export default connect(mapStateToProps)(Login);
