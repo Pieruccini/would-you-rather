@@ -5,11 +5,16 @@ import PollView from "./PollView";
 import Nav from "react-bootstrap/Nav";
 import ListGroup from "react-bootstrap/ListGroup";
 
-const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
+const PollList = ({ pollViewsAnswered, pollViewsNotAnswered, history }) => {
   const [tab, setTab] = useState(0);
   const pools = [pollViewsNotAnswered, pollViewsAnswered];
+
   const handleTabUpdate = (index) => {
     setTab(index);
+  };
+
+  const handlePollView = (id) => {
+    history.push(`/questions/${id}`);
   };
 
   return (
@@ -44,6 +49,7 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered }) => {
               name={poll.name}
               avatarURL={poll.avatarURL}
               optionOneText={poll.optionOneText}
+              onClick={() => handlePollView(poll.id)}
             />
           </ListGroup.Item>
         ))}

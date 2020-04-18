@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 
-const PollView = ({ name, optionOneText, avatarURL }) => {
+const PollView = ({ name, optionOneText, avatarURL, onClick }) => {
   return (
     <Container>
       <Row>
@@ -22,8 +22,8 @@ const PollView = ({ name, optionOneText, avatarURL }) => {
         <Col>
           <h5>Would you rather?</h5>
           <p>{optionOneText} or ...</p>
-          <Button block variant="outline-secondary">
-            View Pool
+          <Button block onClick={() => onClick()} variant="outline-secondary">
+            View Poll
           </Button>
         </Col>
       </Row>

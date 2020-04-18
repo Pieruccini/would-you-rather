@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../css/App.css";
 import PollList from "./PollList";
 import Question from "./Question";
@@ -6,14 +6,21 @@ import { connect } from "react-redux";
 import NewQuestion from "./NewQuestion";
 import LeaderboadList from "./LeaderboadList";
 import Login from "./Login";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Container from "react-bootstrap/Container";
+import { handleInitialDataUsers } from "../actions/users";
+import { handleInitialData } from "../actions/shared";
 
 function App({ loaded, dispatch }) {
+  useEffect(() => {
+    dispatch(handleInitialData());
+  }, [dispatch]);
+
   return (
     <Container>
       <BrowserRouter>
-        <Route exact path="/" component={PollList} />
+        {!loaded && <Redirect to="/login" />}
+        <Route path="/home" component={PollList} />
         <Route path="/login" component={Login} />
         <Route path="/add" component={NewQuestion} />
         <Route path="/questions/:questions_id" component={Question} />
@@ -24,11 +31,7 @@ function App({ loaded, dispatch }) {
 }
 
 const mapStateToProps = ({ questions, users, authUser }) => ({
-  // TODO: look for a better way to implement it
-  loaded:
-    authUser !== null &&
-    Object.keys(questions).length > 0 &&
-    Object.keys(users).length > 0,
+  logged: authUser !== null,
 });
 
 export default connect(mapStateToProps)(App);

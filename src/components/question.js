@@ -12,7 +12,6 @@ import { handleQuestionAnswer } from "../actions/questions";
 import { MdFace } from "react-icons/md";
 
 const Question = ({
-  id,
   optionOne,
   optionTwo,
   avatarURL,
@@ -20,6 +19,7 @@ const Question = ({
   userHasAnswered,
   dispatch,
   authUser,
+  id,
 }) => {
   const [answer, setAnswer] = useState(
     userHasAnswered ? authUser.answers[id] : null
@@ -130,9 +130,11 @@ const Question = ({
   );
 };
 
-const stateMapToProps = ({ questions, users, authUser }, { id }) => {
+const stateMapToProps = ({ questions, users, authUser }, { match }) => {
+  console.log("match", match);
+  const { questions_id } = match.params;
   return {
-    ...getQuestionData(questions[id], users, authUser),
+    ...getQuestionData(questions[questions_id], users, authUser),
     authUser,
   };
 };

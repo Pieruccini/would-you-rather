@@ -9,6 +9,7 @@ import middleware from "./middleware";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const store = createStore(reducers, middleware);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

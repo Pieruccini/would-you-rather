@@ -9,7 +9,8 @@ import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import { handleLogin } from "../actions/authUser";
 
-const Login = ({ users, dispatch }) => {
+const Login = ({ users, dispatch, history }) => {
+  console.log("history", history);
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleSelectUser = (user) => {
@@ -18,6 +19,7 @@ const Login = ({ users, dispatch }) => {
 
   const handleSubmit = () => {
     dispatch(handleLogin(selectedUser));
+    history.push("/home");
   };
 
   return (
