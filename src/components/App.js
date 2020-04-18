@@ -1,50 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../css/App.css";
 import PollList from "./PollList";
 import Question from "./Question";
 import { connect } from "react-redux";
-import { authLogin } from "../actions/authUser";
-import { handleInitialData } from "../actions/shared";
 import NewQuestion from "./NewQuestion";
 import LeaderboadList from "./LeaderboadList";
 import Login from "./Login";
+import { BrowserRouter, Route } from "react-router-dom";
+import Container from "react-bootstrap/Container";
 
 function App({ loaded, dispatch }) {
-  useEffect(() => {
-    // //TODO: dispatch handles after login
-    dispatch(handleInitialData());
-    // //TODO: remove authLogin once we have a login screen
-    dispatch(
-      authLogin({
-        id: "sarahedo",
-        name: "Sarah Edo",
-        avatarURL: "../../images/snow.jpg",
-        answers: {
-          "8xf0y6ziyjabvozdd253nd": "optionOne",
-          "6ni6ok3ym7mf1p33lnez": "optionOne",
-          am8ehyc8byjqgar0jgpub9: "optionTwo",
-          loxhs1bqm25b708cmbf3g: "optionTwo",
-        },
-        questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
-      })
-    );
-  }, [dispatch]);
-
-  useEffect(() => {});
-
   return (
-    <div className="App">
-      would you rather
-      {loaded ? (
-        <div>
-          <Login />
-          <LeaderboadList />
-          <NewQuestion />
-          <Question id={"8xf0y6ziyjabvozdd253nd"} />
-          <PollList />
-        </div>
-      ) : null}
-    </div>
+    <Container>
+      <BrowserRouter>
+        <Route exact path="/" component={PollList} />
+        <Route path="/login" component={Login} />
+        <Route path="/add" component={NewQuestion} />
+        <Route path="/questions/:questions_id" component={Question} />
+        <Route path="/leaderboard" component={LeaderboadList} />
+      </BrowserRouter>
+    </Container>
   );
 }
 
