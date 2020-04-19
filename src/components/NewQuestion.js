@@ -9,12 +9,11 @@ const NewQuestion = ({ dispatch, authUser, history }) => {
     optionOneText: "",
     optionTwoText: "",
   });
-  const answerRef = useRef(authUser.questions);
 
-  console.log("authUser", authUser);
+  const answerRef = useRef(authUser.questions.length);
+
   useEffect(() => {
-    if (authUser.questions.length !== answerRef.current.length) {
-      console.log("has created a question");
+    if (authUser.questions.length !== answerRef.current) {
       history.push("/home");
     }
   }, [authUser, history]);

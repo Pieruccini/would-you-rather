@@ -33,3 +33,13 @@ code {
   height: 48px;
   background-color: green;
 }
+
+.avatar {
+  background-color: #eeeeee;
+  border-radius: 50%;
+  width: 64px !important;
+  height: 64px !important;
+  display: flex;
+  justify-content: center;
+  padding: 0px !important;
+}

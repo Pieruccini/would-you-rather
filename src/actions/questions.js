@@ -4,7 +4,7 @@ import {
   _saveQuestionAnswer,
 } from "../utils/_DATA";
 import { usersAddAnswer, usersAddQuestion } from "./users";
-import { updateAuthAnswer } from "./authUser";
+import { updateAuthAnswer, updateAuthQuestion } from "./authUser";
 
 export const QUESTIONS_SET = "questions: set";
 export const QUESTIONS_CREATE = "questions: add";
@@ -39,7 +39,7 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
     .then((question) => {
       dispatch(questionCreate(question));
       dispatch(usersAddQuestion({ qId: question.id, authUser: id }));
-      // TODO: update authUser
+      dispatch(updateAuthQuestion({ qId: question.id }));
     })
     .catch((e) => {
       console.error("Error creating question:", e);
