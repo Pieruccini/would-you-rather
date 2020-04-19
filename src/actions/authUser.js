@@ -4,6 +4,7 @@ import { questionsSet } from "./questions";
 
 export const AUTH_LOGIN = "auth: login";
 export const AUTH_UPDATE_ANSWER = "auth: update answer";
+export const AUTH_UPDATE_QUESTION = "auth: update question";
 
 export const authLogin = (user) => ({
   type: AUTH_LOGIN,
@@ -17,6 +18,11 @@ export const updateAuthAnswer = ({ qId, answer }) => ({
   type: AUTH_UPDATE_ANSWER,
   qId,
   answer,
+});
+
+export const updateAuthQuestion = ({ qId }) => ({
+  type: AUTH_UPDATE_QUESTION,
+  qId,
 });
 
 export const handleLogin = (userId) => (dispatch) => {

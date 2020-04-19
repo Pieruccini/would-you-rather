@@ -39,6 +39,7 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
     .then((question) => {
       dispatch(questionCreate(question));
       dispatch(usersAddQuestion({ qId: question.id, authUser: id }));
+      // TODO: update authUser
     })
     .catch((e) => {
       console.error("Error creating question:", e);

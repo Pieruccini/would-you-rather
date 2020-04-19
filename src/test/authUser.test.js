@@ -1,6 +1,10 @@
 import { _getUsersMock } from "./authUser-data";
 import { authUser } from "../reducers/authUser";
-import { authLogin, updateAuthAnswer } from "../actions/authUser";
+import {
+  authLogin,
+  updateAuthAnswer,
+  updateAuthQuestion,
+} from "../actions/authUser";
 
 describe("TEST: AuthUser reducer", () => {
   it("AUTH_LOGIN", () => {
@@ -20,6 +24,16 @@ describe("TEST: AuthUser reducer", () => {
         ...user.answers,
         ["test"]: "optionOne",
       },
+    });
+  });
+
+  it("AUTH_UPDATE_QUESTION", () => {
+    const users = _getUsersMock();
+    const user = users["johndoe"];
+    const action = updateAuthQuestion({ qId: "test" });
+    expect(authUser(user, action)).toEqual({
+      ...user,
+      questions: [...user.questions, "test"],
     });
   });
 });

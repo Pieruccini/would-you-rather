@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Form from "react-bootstrap/Form";
 import { connect } from "react-redux";
 import Button from "react-bootstrap/Button";
 import { handleCreateQuestion } from "../actions/questions";
 
-const NewQuestion = ({ dispatch }) => {
+const NewQuestion = ({ dispatch, authUser, history }) => {
   const [options, setOptions] = useState({
     optionOneText: "",
     optionTwoText: "",
   });
+  const answerRef = useRef(authUser.questions);
+
+  console.log("authUser", authUser);
+  useEffect(() => {
+    if (authUser.questions.length !== answerRef.current.length) {
+      console.log("has created a question");
+      history.push("/home");
+    }
+  }, [authUser, history]);
 
   const handleUpdateOption = (option, text) => {
     setOptions((prev) => ({
@@ -39,6 +48,7 @@ const NewQuestion = ({ dispatch }) => {
           }}
           value={options.optionOneText}
         />
+        <br />
         <p>or</p>
         <Form.Control
           size="sm"
@@ -63,4 +73,8 @@ const NewQuestion = ({ dispatch }) => {
   );
 };
 
-export default connect()(NewQuestion);
+const mapStateToProps = ({ authUser }) => ({
+  authUser,
+});
+
+export default connect(mapStateToProps)(NewQuestion);
