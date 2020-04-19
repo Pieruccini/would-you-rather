@@ -80,12 +80,12 @@ describe("TEST: utils", () => {
     const optionOne = 40;
     const optionTwo = 60;
     expect(calculateAnswerPercentage(optionOne, optionTwo)).toEqual({
-      percentageOne: 40,
-      percentageTwo: 60,
+      one: 40,
+      two: 60,
     });
   });
 
-  it("calculateAnswersPercentage case 1", () => {
+  it("calculateAnswersPercentage case 2", () => {
     const optionOne = 10;
     const optionTwo = 25;
     expect(calculateAnswerPercentage(optionOne, optionTwo)).toEqual({
