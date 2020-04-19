@@ -4,6 +4,7 @@ import {
   _saveQuestionAnswer,
 } from "../utils/_DATA";
 import { usersAddAnswer, usersAddQuestion } from "./users";
+import { updateAuthAnswer } from "./authUser";
 
 export const QUESTIONS_SET = "questions: set";
 export const QUESTIONS_CREATE = "questions: add";
@@ -60,6 +61,7 @@ export const handleQuestionAnswer = ({ qId, answer }) => (
     _saveQuestionAnswer({ authedUser: authUser.id, qid: qId, answer });
     dispatch(questionAddVote({ authUser: authUser.id, qId, answer }));
     dispatch(usersAddAnswer({ qId, answer, authUser: authUser.id }));
+    dispatch(updateAuthAnswer({ qId, answer }));
   } catch (e) {
     console.error("Error handling question answer", e);
   }

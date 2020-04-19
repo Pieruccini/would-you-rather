@@ -5,7 +5,6 @@ import Nav from "react-bootstrap/Nav";
 import { withRouter } from "react-router-dom";
 
 export const NavBar = ({ history }) => {
-  console.log("history", history);
   const handleNavigation = (url) => {
     history.push(url);
   };
