@@ -2,6 +2,7 @@ import {
   AUTH_LOGIN,
   AUTH_UPDATE_ANSWER,
   AUTH_UPDATE_QUESTION,
+  AUTH_LOGOUT,
 } from "../actions/authUser";
 
 export const authUser = (state = null, action) => {
@@ -23,6 +24,9 @@ export const authUser = (state = null, action) => {
         ...state,
         questions: [...state.questions, action.qId],
       };
+
+    case AUTH_LOGOUT:
+      return null;
 
     default:
       return state;

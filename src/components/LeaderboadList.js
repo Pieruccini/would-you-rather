@@ -10,7 +10,7 @@ const LeaderboardList = ({ leaderboard, dispatch }) => {
       <h4>Leaderboard</h4>
       <ListGroup>
         {leaderboard.map((props) => (
-          <ListGroup.Item>
+          <ListGroup.Item key={props.id}>
             <LeaderboardView {...props} />
           </ListGroup.Item>
         ))}

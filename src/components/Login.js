@@ -33,6 +33,7 @@ const Login = ({ users, dispatch, history }) => {
       <h3>Login</h3>
       <InputGroup className="mb-3">
         <FormControl
+          onChange={() => {}}
           placeholder="choose a user to login"
           value={selectedUser ? selectedUser.name : ""}
         />
@@ -43,7 +44,7 @@ const Login = ({ users, dispatch, history }) => {
           id="input-group-dropdown-1"
         >
           {Object.values(users).map((user) => (
-            <Dropdown.Item onClick={() => handleSelectUser(user)}>
+            <Dropdown.Item key={user.id} onClick={() => handleSelectUser(user)}>
               <Image
                 style={{ alignSelf: "center" }}
                 width={32}

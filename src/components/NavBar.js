@@ -6,8 +6,6 @@ import { withRouter } from "react-router-dom";
 import AuthUser from "./AuthUser";
 
 export const NavBar = ({ history }) => {
-  console.log("history", history);
-
   const handleNavigation = (url) => {
     history.push(url);
   };

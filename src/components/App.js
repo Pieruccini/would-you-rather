@@ -15,8 +15,8 @@ import NavBar from "./NavBar";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
-
   useEffect(() => {
+    console.log("cookies", cookies);
     if (cookies.auth) {
       // if the user is saved go to home page
       dispatch(handleLogin(cookies.auth));
@@ -25,18 +25,23 @@ function App({ logged, loaded, dispatch, history }) {
       // if the user is not saved go to login page
       dispatch(handleInitialData());
       history.push("/login");
+      console.log("go to login");
     }
   }, [cookies, history, dispatch]);
 
-  if (!logged || !loaded) return null;
+  if (!loaded) return null;
   return (
     <Container fluid>
-      <NavBar />
-      <Route path="/home" component={PollList} />
       <Route path="/login" component={Login} />
-      <Route path="/add" component={NewQuestion} />
-      <Route path="/questions/:questions_id" component={Question} />
-      <Route path="/leaderboard" component={LeaderboadList} />
+      {logged && loaded && (
+        <React.Fragment>
+          <NavBar />
+          <Route path="/home" component={PollList} />
+          <Route path="/add" component={NewQuestion} />
+          <Route path="/questions/:questions_id" component={Question} />
+          <Route path="/leaderboard" component={LeaderboadList} />
+        </React.Fragment>
+      )}
     </Container>
   );
 }

@@ -6,13 +6,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, withRouter } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { logOut } from "../actions/authUser";
 
-const AuthUser = ({ authUser, history }) => {
+const AuthUser = ({ authUser, dispatch }) => {
   const [, , removeCookie] = useCookies(["auth"]);
   const { avatarURL, name } = authUser;
 
   const handleLogout = () => {
-    history.replace("/Login");
+    dispatch(logOut());
     removeCookie("auth");
   };
 
@@ -30,7 +31,9 @@ const AuthUser = ({ authUser, history }) => {
         </Col>
         <Col>
           <p style={{ margin: 0 }}>{name}</p>
-          <Link onClick={() => handleLogout()}>Logout</Link>
+          <Link to="/Login" onClick={() => handleLogout()}>
+            Logout
+          </Link>
         </Col>
       </Row>
     </Container>

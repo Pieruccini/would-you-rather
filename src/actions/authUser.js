@@ -3,6 +3,7 @@ import { usersSet } from "./users";
 import { questionsSet } from "./questions";
 
 export const AUTH_LOGIN = "auth: login";
+export const AUTH_LOGOUT = "auth: logout";
 export const AUTH_UPDATE_ANSWER = "auth: update answer";
 export const AUTH_UPDATE_QUESTION = "auth: update question";
 
@@ -23,6 +24,10 @@ export const updateAuthAnswer = ({ qId, answer }) => ({
 export const updateAuthQuestion = ({ qId }) => ({
   type: AUTH_UPDATE_QUESTION,
   qId,
+});
+
+export const logOut = () => ({
+  type: AUTH_LOGOUT,
 });
 
 export const handleLogin = (userId) => (dispatch) => {
