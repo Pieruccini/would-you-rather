@@ -25,7 +25,7 @@ function App({ logged, loaded, dispatch, history }) {
       dispatch(handleInitialData());
       history.push("/login");
     }
-  }, [cookies, history]);
+  }, [cookies, history, dispatch]);
 
   if (!logged || !loaded) return null;
   return (

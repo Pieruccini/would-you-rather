@@ -73,13 +73,13 @@ const Question = ({
           block
           variant="info"
           size="lg"
-          disabled={userHasAnswered}
+          disabled={answer}
           onClick={() => handleAnswer("optionOne")}
         >
           {optionOne.text}
-          {userHasAnswered && (
+          {answer && (
             <OverlayTrigger
-              defaultShow={userHasAnswered}
+              defaultShow={answer}
               placement="right"
               trigger="click"
               overlay={popover(
@@ -102,15 +102,15 @@ const Question = ({
           block
           variant="info"
           size="lg"
-          disabled={userHasAnswered}
+          disabled={answer}
           onClick={() =>
             handleAnswer("optionTwo", answer === "optionOne" ? avatarURL : null)
           }
         >
           {optionTwo.text}
-          {userHasAnswered && (
+          {answer && (
             <OverlayTrigger
-              defaultShow={userHasAnswered}
+              defaultShow={answer}
               placement="right"
               trigger="click"
               overlay={popover(optionTwo.votes.length)}
@@ -131,7 +131,6 @@ const Question = ({
 };
 
 const stateMapToProps = ({ questions, users, authUser }, { match }) => {
-  console.log("match", match);
   const { questions_id } = match.params;
   return {
     ...getQuestionData(questions[questions_id], users, authUser),

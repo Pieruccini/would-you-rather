@@ -1,4 +1,3 @@
-import { handleInitialData } from "./shared";
 import { _getUsers, _getQuestions } from "../utils/_DATA";
 import { usersSet } from "./users";
 import { questionsSet } from "./questions";

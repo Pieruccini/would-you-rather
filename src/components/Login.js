@@ -16,7 +16,7 @@ const Login = ({ users, dispatch, history }) => {
 
   useEffect(() => {
     if (cookies.auth) setSelectedUser(users[cookies.auth]);
-  }, [users]);
+  }, [users, cookies.auth]);
 
   const handleSelectUser = (user) => {
     setSelectedUser(user);
