@@ -84,7 +84,7 @@ const Question = ({
               trigger="click"
               overlay={popover(
                 optionOne.votes.length,
-                answer === "optionOne" ? avatarURL : null
+                answer === "optionOne" ? authUser.avatarURL : null
               )}
             >
               <ProgressBar
@@ -103,9 +103,7 @@ const Question = ({
           variant="info"
           size="lg"
           disabled={answer}
-          onClick={() =>
-            handleAnswer("optionTwo", answer === "optionOne" ? avatarURL : null)
-          }
+          onClick={() => handleAnswer("optionTwo")}
         >
           {optionTwo.text}
           {answer && (
@@ -113,7 +111,10 @@ const Question = ({
               defaultShow={answer}
               placement="right"
               trigger="click"
-              overlay={popover(optionTwo.votes.length)}
+              overlay={popover(
+                optionTwo.votes.length,
+                answer === "optionTwo" ? authUser.avatarURL : null
+              )}
             >
               <ProgressBar
                 variant="warning"
