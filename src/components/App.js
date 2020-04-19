@@ -11,6 +11,7 @@ import Container from "react-bootstrap/Container";
 import { handleInitialData } from "../actions/shared";
 import { useCookies } from "react-cookie";
 import { handleLogin } from "../actions/authUser";
+import NavBar from "./NavBar";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
@@ -29,7 +30,8 @@ function App({ logged, loaded, dispatch, history }) {
 
   if (!logged || !loaded) return null;
   return (
-    <Container>
+    <Container fluid>
+      <NavBar />
       <Route path="/home" component={PollList} />
       <Route path="/login" component={Login} />
       <Route path="/add" component={NewQuestion} />
