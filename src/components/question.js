@@ -54,7 +54,8 @@ const Question = ({
 
   return (
     <Container className="question-container">
-      <Col>
+      <br />
+      <Col className="center text-center">
         <Image
           style={{ alignSelf: "center" }}
           width={64}
@@ -64,7 +65,7 @@ const Question = ({
         />
         <p>{name} asks:</p>
       </Col>
-      <Col>
+      <Col className="text-center">
         <h5>Would you rather?</h5>
         <br />
       </Col>

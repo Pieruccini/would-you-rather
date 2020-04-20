@@ -43,3 +43,7 @@ code {
   justify-content: center;
   padding: 0px !important;
 }
+
+.text-center {
+  text-align: center;
+}

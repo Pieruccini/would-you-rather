@@ -35,6 +35,7 @@ const NewQuestion = ({ dispatch, authUser, history }) => {
 
   return (
     <div className="question-container">
+      <br />
       <h4>Would you rather ?</h4>
       <br />
       <Form.Group>

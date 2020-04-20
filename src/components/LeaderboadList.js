@@ -7,7 +7,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 const LeaderboardList = ({ leaderboard, dispatch }) => {
   return (
     <div className="pull-list-container">
-      <h4>Leaderboard</h4>
+      <br />
+      <h4 className="text-center">Leaderboard</h4>
       <ListGroup>
         {leaderboard.map((props) => (
           <ListGroup.Item key={props.id}>

@@ -10,7 +10,7 @@ const LeaderboardView = (props) => {
   return (
     <Container className="center">
       <Row>
-        <Col>
+        <Col className="center text-center">
           <h6>{name}</h6>
           <Image
             style={{ alignSelf: "center" }}
@@ -20,7 +20,7 @@ const LeaderboardView = (props) => {
             roundedCircle
           />
         </Col>
-        <Col className="center">
+        <Col className="center text-center">
           <Badge variant="light">question answered: {answeredQuestions}</Badge>
           <br />
           <Badge variant="light">question created: {createdQuestions}</Badge>

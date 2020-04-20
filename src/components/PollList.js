@@ -19,6 +19,7 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered, history }) => {
 
   return (
     <div className={"pull-list-container"}>
+      <br />
       <Nav fill variant="tabs" defaultActiveKey="/home">
         <Nav.Item>
           <Nav.Link

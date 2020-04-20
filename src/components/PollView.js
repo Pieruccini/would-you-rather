@@ -10,7 +10,7 @@ const PollView = ({ name, optionOneText, avatarURL, onClick }) => {
     <Container>
       <Row>
         <Col className={"center"}>
-          <p>{name}</p>
+          <p className={"text-center"}>{name}</p>
           <Image
             style={{ alignSelf: "center" }}
             width={64}
