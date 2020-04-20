@@ -16,6 +16,7 @@ import LoadingBar from "react-redux-loading-bar";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
+
   useEffect(() => {
     if (cookies.auth) {
       // if the user is saved go to home page
@@ -31,31 +32,32 @@ function App({ logged, loaded, dispatch, history }) {
 
   if (!loaded) return null;
   return (
-    <Container fluid>
-      <LoadingBar style={{ zIndex: 1 }} />
-      <Route path="/login" component={Login} />
-      {logged && loaded && (
-        <React.Fragment>
-          <NavBar />
-          <Route path="/home" component={PollList} />
-          <Route path="/add" component={NewQuestion} />
-          <Route path="/questions/:questions_id" component={Question} />
-          <Route path="/leaderboard" component={LeaderboadList} />
-        </React.Fragment>
-      )}
-      <div className="footer center text-center">
+    <div className="full-height">
+      <Container className="no-padding" fluid>
+        <LoadingBar style={{ zIndex: 1 }} />
+        <Route path="/login" component={Login} />
+        {logged && loaded && (
+          <React.Fragment>
+            <NavBar />
+            <Route path="/home" component={PollList} />
+            <Route path="/add" component={NewQuestion} />
+            <Route path="/questions/:questions_id" component={Question} />
+            <Route path="/leaderboard" component={LeaderboadList} />
+          </React.Fragment>
+        )}
+      </Container>
+      <div className={`footer center text-center`}>
         <a href="https://www.freepik.com/free-photos-vectors/people">
           People vector created by freepik - www.freepik.com
         </a>
       </div>
-    </Container>
+    </div>
   );
 }
 
-const mapStateToProps = ({ questions, users, authUser }) => ({
+const mapStateToProps = ({ questions, authUser }) => ({
   logged: authUser !== null,
   loaded: Object.keys(questions).length > 0,
-  loading: Object.keys(questions).length > 0,
 });
 
 export default withRouter(connect(mapStateToProps)(App));

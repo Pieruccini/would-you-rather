@@ -11,8 +11,10 @@ import { showLoading, hideLoading } from "react-redux-loading-bar";
 export const handleInitialData = () => (dispatch) => {
   const users = _getUsers();
   const questions = _getQuestions();
+  dispatch(showLoading());
   return Promise.all([users, questions]).then((res) => {
     dispatch(usersSet(res[0]));
     dispatch(questionsSet(res[1]));
+    dispatch(hideLoading());
   });
 };

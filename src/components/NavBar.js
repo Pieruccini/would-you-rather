@@ -11,7 +11,7 @@ export const NavBar = ({ history }) => {
   };
 
   return (
-    <Container fluid>
+    <Container className="no-padding" fluid>
       <Navbar bg="dark" variant="dark">
         <Navbar.Brand>Would you rather?</Navbar.Brand>
         <Nav className="mr-auto">

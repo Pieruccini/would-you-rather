@@ -4,6 +4,7 @@ import { getPollViewData } from "../utils/utils";
 import PollView from "./PollView";
 import Nav from "react-bootstrap/Nav";
 import ListGroup from "react-bootstrap/ListGroup";
+import Container from "react-bootstrap/Container";
 
 const PollList = ({ pollViewsAnswered, pollViewsNotAnswered, history }) => {
   const [tab, setTab] = useState(0);
@@ -18,9 +19,9 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered, history }) => {
   };
 
   return (
-    <div className={"pull-list-container"}>
+    <Container className={"pull-list-container"}>
       <br />
-      <Nav fill variant="tabs" defaultActiveKey="/home">
+      <Nav fill variant="tabs">
         <Nav.Item>
           <Nav.Link
             active={tab === 0}
@@ -55,7 +56,7 @@ const PollList = ({ pollViewsAnswered, pollViewsNotAnswered, history }) => {
           </ListGroup.Item>
         ))}
       </ListGroup>
-    </div>
+    </Container>
   );
 };
 
