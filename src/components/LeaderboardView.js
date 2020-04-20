@@ -25,8 +25,8 @@ const LeaderboardView = (props) => {
           <br />
           <Badge variant="light">question created: {createdQuestions}</Badge>
         </Col>
-        <Col>
-          <Badge variant="secondary">
+        <Col className="center">
+          <Badge variant="secondary" style={{ alignSelf: "center" }}>
             <h4>Score</h4>
             <h1>{answeredQuestions + createdQuestions}</h1>
           </Badge>
