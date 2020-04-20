@@ -47,3 +47,11 @@ code {
 .text-center {
   text-align: center;
 }
+
+.footer {
+  height: 40px;
+  background-color: #e7e7e7;
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+}

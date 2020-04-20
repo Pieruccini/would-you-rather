@@ -17,11 +17,10 @@ import LoadingBar from "react-redux-loading-bar";
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
   useEffect(() => {
-    console.log("cookies", cookies);
     if (cookies.auth) {
       // if the user is saved go to home page
       dispatch(handleLogin(cookies.auth));
-      history.push("/home");
+      history.push(history.location.path);
     } else {
       // if the user is not saved go to login page
       dispatch(handleInitialData());
@@ -44,6 +43,11 @@ function App({ logged, loaded, dispatch, history }) {
           <Route path="/leaderboard" component={LeaderboadList} />
         </React.Fragment>
       )}
+      <div className="footer center text-center">
+        <a href="https://www.freepik.com/free-photos-vectors/people">
+          People vector created by freepik - www.freepik.com
+        </a>
+      </div>
     </Container>
   );
 }
