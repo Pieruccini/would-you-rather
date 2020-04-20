@@ -12,6 +12,7 @@ import { handleInitialData } from "../actions/shared";
 import { useCookies } from "react-cookie";
 import { handleLogin } from "../actions/authUser";
 import NavBar from "./NavBar";
+import LoadingBar from "react-redux-loading-bar";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
@@ -32,6 +33,7 @@ function App({ logged, loaded, dispatch, history }) {
   if (!loaded) return null;
   return (
     <Container fluid>
+      <LoadingBar style={{ zIndex: 1 }} />
       <Route path="/login" component={Login} />
       {logged && loaded && (
         <React.Fragment>
@@ -49,6 +51,7 @@ function App({ logged, loaded, dispatch, history }) {
 const mapStateToProps = ({ questions, users, authUser }) => ({
   logged: authUser !== null,
   loaded: Object.keys(questions).length > 0,
+  loading: Object.keys(questions).length > 0,
 });
 
 export default withRouter(connect(mapStateToProps)(App));

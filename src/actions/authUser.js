@@ -1,6 +1,7 @@
 import { _getUsers, _getQuestions } from "../utils/_DATA";
 import { usersSet } from "./users";
 import { questionsSet } from "./questions";
+import { hideLoading, showLoading } from "react-redux-loading-bar";
 
 export const AUTH_LOGIN = "auth: login";
 export const AUTH_LOGOUT = "auth: logout";
@@ -33,9 +34,11 @@ export const logOut = () => ({
 export const handleLogin = (userId) => (dispatch) => {
   const users = _getUsers();
   const questions = _getQuestions();
+  dispatch(showLoading());
   return Promise.all([users, questions]).then((res) => {
     dispatch(usersSet(res[0]));
     dispatch(questionsSet(res[1]));
     dispatch(authLogin(res[0][userId]));
+    dispatch(hideLoading());
   });
 };

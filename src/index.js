@@ -8,8 +8,9 @@ import { createStore } from "redux";
 import middleware from "./middleware";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const store = createStore(reducers, middleware);
+const store = createStore(reducers, composeWithDevTools(middleware));
 
 ReactDOM.render(
   <React.StrictMode>

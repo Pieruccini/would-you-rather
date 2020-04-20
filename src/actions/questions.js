@@ -5,6 +5,7 @@ import {
 } from "../utils/_DATA";
 import { usersAddAnswer, usersAddQuestion } from "./users";
 import { updateAuthAnswer, updateAuthQuestion } from "./authUser";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 export const QUESTIONS_SET = "questions: set";
 export const QUESTIONS_CREATE = "questions: add";
@@ -31,6 +32,7 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
   getState
 ) => {
   const { id } = getState().authUser;
+  dispatch(showLoading());
   return _saveQuestion({
     optionOneText,
     optionTwoText,
@@ -40,6 +42,7 @@ export const handleCreateQuestion = ({ optionOneText, optionTwoText }) => (
       dispatch(questionCreate(question));
       dispatch(usersAddQuestion({ qId: question.id, authUser: id }));
       dispatch(updateAuthQuestion({ qId: question.id }));
+      dispatch(hideLoading());
     })
     .catch((e) => {
       console.error("Error creating question:", e);
