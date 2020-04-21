@@ -10,6 +10,7 @@ import Popover from "react-bootstrap/Popover";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { handleQuestionAnswer } from "../actions/questions";
 import { MdFace } from "react-icons/md";
+import { Redirect } from "react-router-dom";
 
 const Question = ({
   optionOne,
@@ -18,8 +19,8 @@ const Question = ({
   name,
   userHasAnswered,
   dispatch,
-  authUser,
   id,
+  authUser,
 }) => {
   const [answer, setAnswer] = useState(
     userHasAnswered ? authUser.answers[id] : null
@@ -36,6 +37,8 @@ const Question = ({
           two: 0,
         }
   );
+
+  if (!id) return <Redirect to="/404" />;
 
   const handleAnswer = (answer) => {
     dispatch(handleQuestionAnswer({ qId: id, answer }));
@@ -134,8 +137,13 @@ const Question = ({
 
 const stateMapToProps = ({ questions, users, authUser }, { match }) => {
   const { questions_id } = match.params;
+  const question = questions[questions_id];
+
+  if (!question) {
+    return {};
+  }
   return {
-    ...getQuestionData(questions[questions_id], users, authUser),
+    ...getQuestionData(question, users, authUser),
     authUser,
   };
 };

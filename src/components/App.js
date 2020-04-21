@@ -6,13 +6,14 @@ import { connect } from "react-redux";
 import NewQuestion from "./NewQuestion";
 import LeaderboadList from "./LeaderboadList";
 import Login from "./Login";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { handleInitialData } from "../actions/shared";
 import { useCookies } from "react-cookie";
 import { handleLogin } from "../actions/authUser";
 import NavBar from "./NavBar";
 import LoadingBar from "react-redux-loading-bar";
+import NoMatch from "./NoMatch";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
@@ -38,10 +39,13 @@ function App({ logged, loaded, dispatch, history }) {
         {logged && loaded && (
           <React.Fragment>
             <NavBar />
-            <Route path="/home" component={PollList} />
-            <Route path="/add" component={NewQuestion} />
-            <Route path="/questions/:questions_id" component={Question} />
-            <Route path="/leaderboard" component={LeaderboadList} />
+            <Switch>
+              <Route path="/home" component={PollList} />
+              <Route path="/add" component={NewQuestion} />
+              <Route path="/questions/:questions_id" component={Question} />
+              <Route path="/leaderboard" component={LeaderboadList} />
+              <Route component={NoMatch} />
+            </Switch>
           </React.Fragment>
         )}
       </Container>
