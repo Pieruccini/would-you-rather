@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Badge from "react-bootstrap/Badge";
 
 const LeaderboardView = (props) => {
-  const { name, avatarURL, answeredQuestions, createdQuestions } = props;
+  const { name, avatarURL, answeredQuestions, createdQuestions, score } = props;
   return (
     <Container className="center">
       <Row>
@@ -28,7 +28,7 @@ const LeaderboardView = (props) => {
         <Col className="center">
           <Badge variant="secondary" style={{ alignSelf: "center" }}>
             <h4>Score</h4>
-            <h1>{answeredQuestions + createdQuestions}</h1>
+            <h1>{score}</h1>
           </Badge>
         </Col>
       </Row>

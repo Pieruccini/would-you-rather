@@ -7,6 +7,7 @@ export const getLeaderboardData = (users) => {
       avatarURL,
       answeredQuestions: Object.keys(answers).length,
       createdQuestions: questions.length,
+      score: Object.keys(answers).length + questions.length,
     };
     return [...acc, data];
   }, []);

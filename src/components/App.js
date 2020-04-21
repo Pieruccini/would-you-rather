@@ -16,7 +16,6 @@ import LoadingBar from "react-redux-loading-bar";
 
 function App({ logged, loaded, dispatch, history }) {
   const [cookies] = useCookies(["auth"]);
-
   useEffect(() => {
     if (cookies.auth) {
       // if the user is saved go to home page
