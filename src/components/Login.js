@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import Image from "react-bootstrap/Image";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import { handleLogin } from "../actions/authUser";
 import { useCookies } from "react-cookie";
+import Image from "react-bootstrap/Image";
 
 const Login = ({ users, dispatch, history }) => {
   const [selectedUser, setSelectedUser] = useState(null);
@@ -29,8 +29,15 @@ const Login = ({ users, dispatch, history }) => {
   };
 
   return (
-    <Container>
-      <h3>Login</h3>
+    <Container className="center" style={{ height: "100%" }}>
+      <Image
+        style={{ alignSelf: "center" }}
+        width={148}
+        height={148}
+        src={"../../images/logo.png"}
+      />
+      <br />
+      <h3 className="text-center">Login</h3>
       <InputGroup className="mb-3">
         <FormControl
           onChange={() => {}}
