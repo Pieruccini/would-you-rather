@@ -19,12 +19,13 @@ const AuthUser = ({ authUser, dispatch, location }) => {
 
   useEffect(() => {
     window.onpopstate = (e) => {
+      console.log("location", location.pathname);
       if (location.pathname === "/login") {
         handleLogout();
       }
     };
     // eslint-disable-next-line
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <Container>
@@ -40,7 +41,7 @@ const AuthUser = ({ authUser, dispatch, location }) => {
         </Col>
         <Col>
           <p style={{ margin: 0 }}>{name}</p>
-          <Link to="/Login" onClick={() => handleLogout()}>
+          <Link to="/login" onClick={() => handleLogout()}>
             Logout
           </Link>
         </Col>

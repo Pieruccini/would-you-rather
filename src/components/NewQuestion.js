@@ -14,7 +14,7 @@ const NewQuestion = ({ dispatch, authUser, history }) => {
 
   useEffect(() => {
     if (authUser.questions.length !== answerRef.current) {
-      history.push("/home");
+      history.push("/");
     }
   }, [authUser, history]);
 

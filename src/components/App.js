@@ -10,13 +10,13 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { handleInitialData } from "../actions/shared";
 import { useCookies } from "react-cookie";
-import { handleLogin } from "../actions/authUser";
+import { handleLogin, logOut } from "../actions/authUser";
 import NavBar from "./NavBar";
 import LoadingBar from "react-redux-loading-bar";
 import NoMatch from "./NoMatch";
 
 function App({ logged, loaded, dispatch, history, location }) {
-  const [cookies] = useCookies(["auth"]);
+  const [cookies, , removeCookie] = useCookies(["auth"]);
 
   // on component did mount check id the user is logged
   // if not redirect to login page
@@ -24,19 +24,24 @@ function App({ logged, loaded, dispatch, history, location }) {
     if (cookies.auth) {
       // if the user is saved go to home page
       dispatch(handleLogin(cookies.auth));
-      history.replace(location.pathname);
+      history.replace(location.pathname !== "/login" ? location.pathname : "/");
     } else {
       // if the user is not saved go to login page
       dispatch(handleInitialData());
       history.replace("/login");
     }
     // eslint-disable-next-line
-  }, [cookies]);
+  }, []);
 
   // if the user is not at login page without being logged in redirect to login page
   useEffect(() => {
     if (location.pathname !== "/login" && !logged && !cookies.auth) {
       history.replace("/login");
+    }
+    // logout if the user goes back to login
+    if (location.pathname === "/login" && logged) {
+      dispatch(logOut());
+      removeCookie("auth");
     }
     // eslint-disable-next-line
   }, [location.pathname]);
@@ -51,7 +56,7 @@ function App({ logged, loaded, dispatch, history, location }) {
           <React.Fragment>
             <NavBar />
             <Switch>
-              <Route path="/home" component={PollList} />
+              <Route exact path="/" component={PollList} />
               <Route path="/add" component={NewQuestion} />
               <Route path="/questions/:questions_id" component={Question} />
               <Route path="/leaderboard" component={LeaderboadList} />

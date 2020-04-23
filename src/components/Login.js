@@ -24,7 +24,7 @@ const Login = ({ users, dispatch, history }) => {
 
   const handleSubmit = () => {
     dispatch(handleLogin(selectedUser.id));
-    history.push("/home");
+    history.replace("/");
     setCookie("auth", selectedUser.id);
   };
 

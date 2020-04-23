@@ -16,10 +16,9 @@ export const NavBar = ({ history }) => {
         <Navbar.Brand>Would you rather?</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link
-            onClick={() => handleNavigation("/home")}
+            onClick={() => handleNavigation("/")}
             style={{
-              fontWeight:
-                history.location.pathname === "/home" ? "bold" : "normal",
+              fontWeight: history.location.pathname === "/" ? "bold" : "normal",
             }}
           >
             Home
