@@ -1,8 +1,10 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/73c2e832-f2a0-4532-a62a-0b54c861f08c/deploy-status)](https://app.netlify.com/sites/udacityw-would-you-rather/deploys)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Would you rather is project made for Udacity react nanodegree program to consolidate my knowlogy in React & Redux.
 
-Would you rather is a platform that users are able to answer questions, see which questions they havent answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
+A platform that users are able to answer questions, see which questions they havent answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
 # Available Scripts
 
@@ -31,3 +33,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+## Demo
+
+[See demo](https://udacityw-would-you-rather.netlify.app/)
