@@ -15,20 +15,27 @@ import NavBar from "./NavBar";
 import LoadingBar from "react-redux-loading-bar";
 import NoMatch from "./NoMatch";
 
-function App({ logged, loaded, dispatch, history }) {
+function App({ logged, loaded, dispatch, history, location }) {
   const [cookies] = useCookies(["auth"]);
+
   useEffect(() => {
     if (cookies.auth) {
       // if the user is saved go to home page
       dispatch(handleLogin(cookies.auth));
-      history.push(history.location.path);
+      history.replace(location.pathname);
     } else {
       // if the user is not saved go to login page
       dispatch(handleInitialData());
-      history.push("/login");
-      console.log("go to login");
+      history.replace("/login");
     }
   }, [cookies, history, dispatch]);
+
+  useEffect(() => {
+    console.log("location", location.pathname);
+    if (location.pathname !== "/login" && !logged) {
+      history.replace("/login");
+    }
+  }, [location]);
 
   if (!loaded) return null;
   return (

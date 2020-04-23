@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
@@ -8,7 +8,7 @@ import { Link, withRouter } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { logOut } from "../actions/authUser";
 
-const AuthUser = ({ authUser, dispatch }) => {
+const AuthUser = ({ authUser, dispatch, location }) => {
   const [, , removeCookie] = useCookies(["auth"]);
   const { avatarURL, name } = authUser;
 
@@ -16,6 +16,14 @@ const AuthUser = ({ authUser, dispatch }) => {
     dispatch(logOut());
     removeCookie("auth");
   };
+
+  useEffect(() => {
+    window.onpopstate = (e) => {
+      if (location.pathname === "/login") {
+        handleLogout();
+      }
+    };
+  }, [location]);
 
   return (
     <Container>
