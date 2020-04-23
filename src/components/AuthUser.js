@@ -19,7 +19,6 @@ const AuthUser = ({ authUser, dispatch, location }) => {
 
   useEffect(() => {
     window.onpopstate = (e) => {
-      console.log("location", location.pathname);
       if (location.pathname === "/login") {
         handleLogout();
       }
