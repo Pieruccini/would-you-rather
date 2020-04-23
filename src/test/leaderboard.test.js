@@ -11,6 +11,8 @@ describe("TEST: leaderbard utils", () => {
         avatarURL: "../../images/leaf.jpg",
         answeredQuestions: 3,
         createdQuestions: 2,
+        score: 5,
+        id: "johndoe",
       },
     ];
     expect(getLeaderboardData(user)).toEqual(result);
