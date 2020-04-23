@@ -23,7 +23,8 @@ const AuthUser = ({ authUser, dispatch, location }) => {
         handleLogout();
       }
     };
-  }, [location]);
+    // eslint-disable-next-line
+  }, [location.pathname]);
 
   return (
     <Container>

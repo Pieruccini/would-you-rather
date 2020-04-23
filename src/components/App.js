@@ -18,6 +18,8 @@ import NoMatch from "./NoMatch";
 function App({ logged, loaded, dispatch, history, location }) {
   const [cookies] = useCookies(["auth"]);
 
+  // on component did mount check id the user is logged
+  // if not redirect to login page
   useEffect(() => {
     if (cookies.auth) {
       // if the user is saved go to home page
@@ -28,14 +30,16 @@ function App({ logged, loaded, dispatch, history, location }) {
       dispatch(handleInitialData());
       history.replace("/login");
     }
-  }, [cookies, history, dispatch]);
+    // eslint-disable-next-line
+  }, [cookies]);
 
+  // if the user is not at login page without being logged in redirect to login page
   useEffect(() => {
-    console.log("location", location.pathname);
-    if (location.pathname !== "/login" && !logged) {
+    if (location.pathname !== "/login" && !logged && !cookies.auth) {
       history.replace("/login");
     }
-  }, [location]);
+    // eslint-disable-next-line
+  }, [location.pathname]);
 
   if (!loaded) return null;
   return (
