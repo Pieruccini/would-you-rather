@@ -10,7 +10,6 @@ import { logOut } from "../actions/authUser";
 
 const AuthUser = ({ authUser, dispatch, location }) => {
   const [, , removeCookie] = useCookies(["auth"]);
-  const { avatarURL, name } = authUser;
 
   const handleLogout = () => {
     dispatch(logOut());
@@ -25,6 +24,9 @@ const AuthUser = ({ authUser, dispatch, location }) => {
     };
     // eslint-disable-next-line
   }, [location]);
+
+  if (!authUser) return null;
+  const { avatarURL, name } = authUser;
 
   return (
     <Container>

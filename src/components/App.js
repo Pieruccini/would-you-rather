@@ -10,60 +10,48 @@ import { Route, withRouter, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { handleInitialData } from "../actions/shared";
 import { useCookies } from "react-cookie";
-import { handleLogin, logOut } from "../actions/authUser";
+import { handleLogin } from "../actions/authUser";
 import NavBar from "./NavBar";
 import LoadingBar from "react-redux-loading-bar";
 import NoMatch from "./NoMatch";
+import PrivateRouter from "./PrivateRouter";
 
-function App({ logged, loaded, dispatch, history, location }) {
-  const [cookies, , removeCookie] = useCookies(["auth"]);
+function App({ logged, dispatch, history, location }) {
+  const [cookies] = useCookies(["auth"]);
 
   // on component did mount check id the user is logged
   // if not redirect to login page
   useEffect(() => {
+    dispatch(handleInitialData());
     if (cookies.auth) {
       // if the user is saved go to home page
       dispatch(handleLogin(cookies.auth));
       history.replace(location.pathname !== "/login" ? location.pathname : "/");
-    } else {
-      // if the user is not saved go to login page
-      dispatch(handleInitialData());
-      history.replace("/login");
     }
-    // eslint-disable-next-line
+    //eslint-disable-next-line
   }, []);
 
-  // if the user is not at login page without being logged in redirect to login page
-  useEffect(() => {
-    if (location.pathname !== "/login" && !logged && !cookies.auth) {
-      history.replace("/login");
-    }
-    // logout if the user goes back to login
-    if (location.pathname === "/login" && logged) {
-      dispatch(logOut());
-      removeCookie("auth");
-    }
-    // eslint-disable-next-line
-  }, [location.pathname]);
-
-  if (!loaded) return null;
   return (
     <div className="full-height">
       <Container className="no-padding" fluid>
         <LoadingBar style={{ zIndex: 1 }} />
-        <Route path="/login" component={Login} />
-        {logged && loaded && (
-          <React.Fragment>
-            <NavBar />
-            <Switch>
-              <Route exact path="/" component={PollList} />
-              <Route path="/add" component={NewQuestion} />
-              <Route path="/questions/:questions_id" component={Question} />
-              <Route path="/leaderboard" component={LeaderboadList} />
-              <Route component={NoMatch} />
-            </Switch>
-          </React.Fragment>
-        )}
+        <NavBar />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <PrivateRouter logged={logged} exact path="/" component={PollList} />
+          <PrivateRouter logged={logged} path="/add" component={NewQuestion} />
+          <PrivateRouter
+            logged={logged}
+            path="/questions/:questions_id"
+            component={Question}
+          />
+          <PrivateRouter
+            logged={logged}
+            path="/leaderboard"
+            component={LeaderboadList}
+          />
+          <Route component={NoMatch} />
+        </Switch>
       </Container>
       <div className={`footer center text-center`}>
         <a href="https://www.freepik.com/free-photos-vectors/people">
@@ -74,9 +62,8 @@ function App({ logged, loaded, dispatch, history, location }) {
   );
 }
 
-const mapStateToProps = ({ questions, authUser }) => ({
+const mapStateToProps = ({ authUser }) => ({
   logged: authUser !== null,
-  loaded: Object.keys(questions).length > 0,
 });
 
 export default withRouter(connect(mapStateToProps)(App));

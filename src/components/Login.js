@@ -10,13 +10,20 @@ import { handleLogin } from "../actions/authUser";
 import { useCookies } from "react-cookie";
 import Image from "react-bootstrap/Image";
 
-const Login = ({ users, dispatch, history }) => {
+const Login = ({ users, authUser, dispatch, history, location }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [cookies, setCookie] = useCookies(["auth"]);
+  const { from } = location.state || { from: { pathname: "/" } };
 
   useEffect(() => {
     if (cookies.auth) setSelectedUser(users[cookies.auth]);
+    // eslint-disable-next-line
   }, [users, cookies.auth]);
+
+  useEffect(() => {
+    if (authUser) history.replace(from.pathname);
+    // eslint-disable-next-line
+  }, [authUser]);
 
   const handleSelectUser = (user) => {
     setSelectedUser(user);
@@ -24,7 +31,6 @@ const Login = ({ users, dispatch, history }) => {
 
   const handleSubmit = () => {
     dispatch(handleLogin(selectedUser.id));
-    history.replace("/");
     setCookie("auth", selectedUser.id);
   };
 
@@ -77,8 +83,9 @@ const Login = ({ users, dispatch, history }) => {
   );
 };
 
-const mapStateToProps = ({ users }) => ({
+const mapStateToProps = ({ users, authUser }) => ({
   users,
+  authUser,
 });
 
 export default connect(mapStateToProps)(Login);
